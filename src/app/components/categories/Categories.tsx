@@ -8,11 +8,15 @@ import Slider from "react-slick";
 export default function Categories() {
   let sliderRef = useRef<Slider>(null);
   const next = () => {
-    sliderRef.slickNext();
+    if (sliderRef.current) {
+      sliderRef.current.slickNext();
+    }
   };
 
   const previous = () => {
-    sliderRef.slickPrev();
+    if (sliderRef.current) {
+      sliderRef.current.slickPrev();
+    }
   };
 
   const settings = {
@@ -37,12 +41,7 @@ export default function Categories() {
         </h3>
 
         <div className="slider-container">
-          <Slider
-            ref={(slider: React.RefObject<Slider>) => {
-              sliderRef = slider;
-            }}
-            {...settings}
-          >
+          <Slider ref={sliderRef} {...settings}>
             <div className="p-4">
               <div
                 key={1}

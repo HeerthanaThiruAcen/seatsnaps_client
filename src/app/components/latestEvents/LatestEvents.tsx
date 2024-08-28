@@ -25,7 +25,10 @@ export default function LatestEvents() {
           {chips.map((chip, index) => (
             <div
               key={index}
-              className="text-[#6F6F6F] text-[20px] font-semibold px-6 py-2 rounded-[50px] border-[#6F6F6F] border"
+              className={
+                dmSans.className +
+                " text-[#6F6F6F] text-[20px] font-semibold px-6 py-2 rounded-[50px] border-[#6F6F6F] border"
+              }
             >
               {chip.name}
             </div>

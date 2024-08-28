@@ -1,12 +1,19 @@
+"use client";
 import { dmSans } from "@/app/fonts";
 import Image from "next/image";
 import React from "react";
 import priceIcon from "../../../../public/price.svg";
 import interestIcon from "../../../../public/interest.svg";
-import wishListIcon from "../../../../public/wishListIcon.svg";
+import wishListIcon from "../../../../public/wishlistIcon.svg";
+import { useRouter } from "next/navigation";
+
 export default function EventCard() {
+  const router = useRouter();
   return (
-    <div className=" rounded-[10px] overflow-hidden border border-[#F6F6F6]">
+    <div
+      className=" rounded-[10px] overflow-hidden border border-[#F6F6F6] cursor-pointer"
+      onClick={() => router.push("/events/fr")}
+    >
       <div className=" w-full h-[254px] relative">
         <Image alt="" src="/hero-bg.jpg" fill />
         <div className="absolute bottom-0 left-0 text-[#2D2C3C] text-[18px] bg-[#FFE047] px-[10px] py-[5px] rounded-tr-[6px]">
