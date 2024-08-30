@@ -1,42 +1,17 @@
 import { dmSans } from "@/app/fonts";
 import React from "react";
-import shareIcon from "../../../../../../public/share.svg";
 import ticket from "../../../../../../public/price.svg";
 import ticketGray from "../../../../../../public/ticket-gray.svg";
 import dateIcon from "../../../../../../public/dateIcon.svg";
 import timeIcon from "../../../../../../public/timeIcon.svg";
 import locationIcon from "../../../../../../public/locationIcon.svg";
 import Image from "next/image";
+import ActionButtons from "./ActionButtons";
 
 export default function TicketInfo() {
   return (
-    <div className="flex flex-col gap-6">
-      <div className="flex items-center gap-4 justify-end">
-        <button
-          className={
-            dmSans.className +
-            " bg-[#3772FF] text-white rounded-[8px] px-7 py-4 text-sm  block "
-          }
-        >
-          <Image src={shareIcon} alt="" height={24} width={15} />
-        </button>
-        <button
-          className={
-            dmSans.className +
-            " border-[#3772FF]  border-[2px] text-[#3772FF] font-bold rounded-[8px] px-[26px] py-[14px] text-sm  block "
-          }
-        >
-          <p>Watch Trailer</p>
-        </button>
-        <button
-          className={
-            dmSans.className +
-            " bg-[#3772FF] text-white rounded-[8px] px-7 py-4 text-sm  block font-bold "
-          }
-        >
-          <p>Buy Tickets</p>
-        </button>
-      </div>
+    <div className="flex flex-col gap-6 sticky top-0">
+      <ActionButtons />
       <div>
         <h3
           className={
