@@ -7,11 +7,13 @@ import timeIcon from "../../../../../../public/timeIcon.svg";
 import locationIcon from "../../../../../../public/locationIcon.svg";
 import Image from "next/image";
 import ActionButtons from "./ActionButtons";
+import { Event } from "@/app/types";
+import dayjs from "dayjs";
 
-export default function TicketInfo() {
+export default function TicketInfo({ eventData }: { eventData: Event }) {
   return (
     <div className="flex flex-col gap-6 sticky top-0">
-      <ActionButtons />
+      <ActionButtons eventData={eventData} />
       <div>
         <h3
           className={
@@ -21,62 +23,36 @@ export default function TicketInfo() {
           Ticket Information
         </h3>
         <div className="flex flex-col gap-6">
-          <div className="px-3 py-4 border-[#DFDFDF] border rounded-[4px]">
-            <div className="flex item-center justify-between mb-4">
-              <div className="flex items-center gap-2">
-                <Image src={ticket} alt="" height={14} width={14} />
-                <p className={dmSans.className + " text-sm text-[#2D2C3C]"}>
-                  Standard Ticket
-                </p>
-              </div>
-              <p className={dmSans.className + " text-sm text-[#8B8B8B]"}>
-                Sales end on Sep 20, 2024
-              </p>
-            </div>
-            <div className="flex item-center justify-between">
-              <p
-                className={
-                  dmSans.className + " text-[18px] font-bold text-[#2D2C3C]"
-                }
-              >
-                LKR 800
-              </p>
-              <div className="flex items-center gap-2">
-                <Image src={ticketGray} alt="" height={12} width={12} />
+          {eventData?.venues?.zone_ticket_category?.map((ticketCategory) => (
+            <div className="px-3 py-4 border-[#DFDFDF] border rounded-[4px]">
+              <div className="flex item-center justify-between mb-4">
+                <div className="flex items-center gap-2">
+                  <Image src={ticket} alt="" height={14} width={14} />
+                  <p className={dmSans.className + " text-sm text-[#2D2C3C]"}>
+                    {ticketCategory.name}
+                  </p>
+                </div>
                 <p className={dmSans.className + " text-sm text-[#8B8B8B]"}>
-                  05 AVAILABLE
+                  Sales end on Sep 20, 2024
                 </p>
               </div>
-            </div>
-          </div>
-          <div className="px-3 py-4 border-[#DFDFDF] border rounded-[4px]">
-            <div className="flex item-center justify-between mb-4">
-              <div className="flex items-center gap-2">
-                <Image src={ticket} alt="" height={14} width={14} />
-                <p className={dmSans.className + " text-sm text-[#2D2C3C]"}>
-                  Special Ticket
+              <div className="flex item-center justify-between">
+                <p
+                  className={
+                    dmSans.className + " text-[18px] font-bold text-[#2D2C3C]"
+                  }
+                >
+                  LKR {ticketCategory.price}
                 </p>
-              </div>
-              <p className={dmSans.className + " text-sm text-[#8B8B8B]"}>
-                Sales end on Sep 20, 2024
-              </p>
-            </div>
-            <div className="flex item-center justify-between">
-              <p
-                className={
-                  dmSans.className + " text-[18px] font-bold text-[#2D2C3C]"
-                }
-              >
-                LKR 1200
-              </p>
-              <div className="flex items-center gap-2">
-                <Image src={ticketGray} alt="" height={12} width={12} />
-                <p className={dmSans.className + " text-sm text-[#8B8B8B]"}>
-                  05 AVAILABLE
-                </p>
+                <div className="flex items-center gap-2">
+                  <Image src={ticketGray} alt="" height={12} width={12} />
+                  <p className={dmSans.className + " text-sm text-[#8B8B8B]"}>
+                    05 AVAILABLE
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
+          ))}
         </div>
       </div>
       <div>
@@ -94,7 +70,7 @@ export default function TicketInfo() {
             <p
               className={dmSans.className + " text-lg text-[#2D2C3C] font-bold"}
             >
-              Saturday, 2 December 2023
+              {dayjs(eventData?.date).format("dddd, D MMMM YYYY")}
             </p>
           </div>
           <div className="flex items-center gap-4">
@@ -103,17 +79,22 @@ export default function TicketInfo() {
             <p
               className={dmSans.className + " text-lg text-[#2D2C3C] font-bold"}
             >
-              6:30 PM - 9:30 PM
+              {eventData?.endTime
+                ? `${dayjs(eventData?.startTime, "HH:mm:ss").format(
+                    "h:mm A"
+                  )} - ${dayjs(eventData?.endTime, "HH:mm:ss").format(
+                    "h:mm A"
+                  )}`
+                : dayjs(eventData?.startTime, "HH:mm:ss").format("h:mm A")}
             </p>
           </div>
-          <div className="flex items-start gap-4">
+          <div className="flex items-center gap-4">
             <Image src={locationIcon} alt="" height={56} width={56} />
 
             <p
               className={dmSans.className + " text-lg text-[#2D2C3C] font-bold"}
             >
-              Bal Gandharva Rang Mandir, Near Junction Of 24th & 32nd Road &
-              Patwardhan Park,Off Linking Road, Bandra West., Mumbai, India
+              {eventData?.venues?.name}
             </p>
           </div>
         </div>

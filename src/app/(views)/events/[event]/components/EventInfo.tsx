@@ -1,9 +1,14 @@
+"use client";
 import { dmSans } from "@/app/fonts";
 import Image from "next/image";
 import React from "react";
 import Tags from "./Tags";
+import { Event } from "@/app/types";
+import dayjs from "dayjs";
 
-export default function EventInfo() {
+export default function EventInfo({ eventData }: { eventData: Event }) {
+  console.log(eventData);
+
   return (
     <div className="flex flex-col gap-8">
       <div>
@@ -14,11 +19,17 @@ export default function EventInfo() {
           }
         >
           <p className="text-[#3772FF] px-[10px] py-[5px] bg-[#3772FF33] rounded-[6px]">
-            Social Activities
+            {eventData?.event_categories?.name}
           </p>
-          <p>Saturday, 2 December 2023</p>
+          <p>{dayjs(eventData?.date).format("dddd, D MMMM YYYY")}</p>
           <div>&bull;</div>
-          <p>6:30 PM - 9:30 PM</p>
+          <p>
+            {eventData?.endTime
+              ? `${dayjs(eventData?.startTime, "HH:mm:ss").format(
+                  "h:mm A"
+                )} - ${dayjs(eventData?.endTime, "HH:mm:ss").format("h:mm A")}`
+              : dayjs(eventData?.startTime, "HH:mm:ss").format("h:mm A")}
+          </p>
         </div>
         <h1
           className={
@@ -26,7 +37,7 @@ export default function EventInfo() {
             " font-bold text-[53px] leading-[69px] text-[#2D2C3C]"
           }
         >
-          Lakeside Camping at Pawna 2023
+          {eventData?.name}
         </h1>
         <p
           className={
@@ -52,16 +63,17 @@ export default function EventInfo() {
                 dmSans.className + "  font-bold text-[18px] text-[#2D2C3C] mb-2"
               }
             >
-              City Youth Movement
+              {eventData?.eventOrganizations?.name}
             </h4>
-            <button
+            {/* <button
               className={
                 dmSans.className +
                 " bg-[#3772FF] text-white rounded-[8px] px-7 py-4 text-sm  block "
               }
             >
               <p>Create Events</p>
-            </button>
+            </button> */}
+            <p>{eventData?.contactPhone}</p>
           </div>
         </div>
       </div>
@@ -74,14 +86,7 @@ export default function EventInfo() {
           Event Description
         </h3>
         <p className={dmSans.className + " text-[#5A5A5A]"}>
-          Get ready to kick off the Christmas season in Mumbai with SOUND OF
-          CHRISTMAS - your favourite LIVE Christmas concert! City Youth Movement
-          invites you to the 4th edition of our annual Christmas festivities -
-          by the youth and for the youth! Feat. your favourite worship leaders,
-          carols, quizzes and some exciting surprises! Bring your family and
-          friends and sing along your favourite Christmas carols on the 2nd of
-          December, 6:30 PM onwards at the Balgandharva Rang Mandir, Bandra
-          West. Book your tickets now!
+          {eventData?.description}
         </p>
       </div>
       <Tags />

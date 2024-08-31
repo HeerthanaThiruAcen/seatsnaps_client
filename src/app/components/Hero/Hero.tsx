@@ -3,8 +3,14 @@ import HeroForm from "./HeroForm";
 import Image from "next/image";
 import heroImg from "../../../../public/hero-bg.jpg";
 import { dmSans } from "@/app/fonts";
+import { createClient } from "@/utils/supabase/server";
 
-export default function Hero() {
+export default async function Hero() {
+  const supabase = createClient();
+  const { data: locations } = await supabase
+    .from("event_locations")
+    .select("*");
+
   return (
     <div className="h-screen flex justify-center items-center relative">
       <div className="container">
@@ -21,7 +27,7 @@ export default function Hero() {
           commodo ligula eget dolor. Aenean massa.
         </p>
         <div className="mx-auto w-fit">
-          <HeroForm />
+          <HeroForm locations={locations || []} />
         </div>
       </div>
       <Image

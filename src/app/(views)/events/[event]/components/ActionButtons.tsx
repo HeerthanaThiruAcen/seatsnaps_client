@@ -4,10 +4,18 @@ import Image from "next/image";
 import React, { useState } from "react";
 import shareIcon from "../../../../../../public/share.svg";
 import BuyTicketModal from "./(booking)/BuyTicketModal";
-import BookingConfirmedModal from "./(booking)/BookingConfirmedModal";
+import { Event } from "@/app/types";
 
-export default function ActionButtons() {
+export default function ActionButtons({ eventData }: { eventData: Event }) {
   const [isBuyTicketModalOpen, setIsBuyTicketModalOpen] = useState(false);
+  const [step, setStep] = useState(1);
+
+  const handleSelectTicket = () => {};
+
+  const handleAttendeeDetails = () => {};
+
+  const handleReviewTickets = () => {};
+
   return (
     <div className="flex items-center gap-4 justify-end ">
       <button
@@ -35,13 +43,12 @@ export default function ActionButtons() {
       >
         <p>Buy Tickets</p>
       </button>
-      {/* <BuyTicketModal
+      <BuyTicketModal
         isModalOpen={isBuyTicketModalOpen}
         handleCancel={() => setIsBuyTicketModalOpen(false)}
-      /> */}
-      <BookingConfirmedModal
-        isModalOpen={isBuyTicketModalOpen}
-        handleCancel={() => setIsBuyTicketModalOpen(false)}
+        step={step}
+        setStep={setStep}
+        handleSelectTicket={handleSelectTicket}
       />
     </div>
   );

@@ -1,8 +1,17 @@
 import EventCard from "@/app/components/latestEvents/EventCard";
 import { dmSans } from "@/app/fonts";
+import { createClient } from "@/utils/supabase/server";
 import React from "react";
 
-export default function OtherEvents() {
+export default async function OtherEvents() {
+  const supabase = createClient();
+
+  const { data: eventsResponse } = await supabase
+    .from("events")
+    .select("*")
+    .eq("isActive", true)
+    .limit(3);
+
   return (
     <div className="container">
       <h3
@@ -14,9 +23,11 @@ export default function OtherEvents() {
         Other events you may like
       </h3>
       <div className="grid grid-cols-3 gap-5 mb-20">
-        <EventCard />
-        <EventCard />
-        <EventCard />
+        {eventsResponse?.map((item) => (
+          <div key={item.id}>
+            <EventCard event={item} />
+          </div>
+        ))}
       </div>
     </div>
   );

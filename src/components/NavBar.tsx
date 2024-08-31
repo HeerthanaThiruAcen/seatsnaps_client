@@ -8,7 +8,10 @@ export default function NavBar() {
     <div className="border-b border-b-[#00000033]">
       <div className="container ">
         <div className="h-[96px] flex items-center justify-between">
-          <Image src={navLogo} alt="" height={49} />
+          <Link href="/">
+            <Image src={navLogo} alt="" height={49} />
+          </Link>
+
           <div className="flex items-center gap-8">
             <Link href="/events">Events</Link>
             <button

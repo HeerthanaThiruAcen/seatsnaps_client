@@ -8,6 +8,9 @@ import ReviewTickets from "./ReviewTickets";
 export default function BuyTicketModal({
   isModalOpen,
   handleCancel,
+  step,
+  setStep,
+  handleSelectTicket,
 }: BuyTicketModalPropsType) {
   return (
     <Modal
@@ -17,9 +20,14 @@ export default function BuyTicketModal({
       onCancel={handleCancel}
       footer={false}
     >
-      {/* <SelectTickets /> */}
-      {/* <AttendeeDetails /> */}
-      <ReviewTickets />
+      {step === 1 && (
+        <SelectTickets
+          handleSelectTicket={handleSelectTicket}
+          setStep={setStep}
+        />
+      )}
+      {step === 2 && <AttendeeDetails />}
+      {step === 3 && <ReviewTickets />}
     </Modal>
   );
 }
