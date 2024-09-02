@@ -54,8 +54,12 @@ export default function AttendeeDetails() {
       </div>
       <Form layout="vertical">
         <div className="border border-[#A9A9A980] border-t-[2px] border-t-[#1FAF38]  px-4 py-[22px]  ">
-          {formItems?.map((item: any) => (
-            <Form.Item label={item.name} name={toCamelCase(item.name)}>
+          {formItems?.map((item: any, index: number) => (
+            <Form.Item
+              label={item.name}
+              name={toCamelCase(item.name)}
+              key={index}
+            >
               {item.type === "Text" ? (
                 <Input
                   placeholder={"Enter Attendee's " + item.name}
@@ -67,8 +71,10 @@ export default function AttendeeDetails() {
                 ""
               ) : (
                 <Radio.Group>
-                  {item.options?.split(",")?.map((item: any) => (
-                    <Radio value={item}>{item}</Radio>
+                  {item.options?.split(",")?.map((item: any, index: number) => (
+                    <Radio key={index} value={item}>
+                      {item}
+                    </Radio>
                   ))}
                 </Radio.Group>
               )}
