@@ -54,8 +54,11 @@ export default function SelectTickets({
         <p className="text-sm">Quantity</p>
       </div>
       <div className="flex flex-col gap-2">
-        {tickets?.map((item) => (
-          <div className="border border-[#A9A9A980] border-l-[8px] border-l-[#1FAF38]  px-4 py-3 flex items-center justify-between ">
+        {tickets?.map((item, index) => (
+          <div
+            key={index}
+            className="border border-[#A9A9A980] border-l-[8px] border-l-[#1FAF38]  px-4 py-3 flex items-center justify-between "
+          >
             <div className="font-semibold text-lg">{item.name}</div>
             <Space>
               <Button

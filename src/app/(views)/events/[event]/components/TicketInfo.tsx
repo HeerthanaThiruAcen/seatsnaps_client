@@ -23,36 +23,41 @@ export default function TicketInfo({ eventData }: { eventData: Event }) {
           Ticket Information
         </h3>
         <div className="flex flex-col gap-6">
-          {eventData?.venues?.zone_ticket_category?.map((ticketCategory) => (
-            <div className="px-3 py-4 border-[#DFDFDF] border rounded-[4px]">
-              <div className="flex item-center justify-between mb-4">
-                <div className="flex items-center gap-2">
-                  <Image src={ticket} alt="" height={14} width={14} />
-                  <p className={dmSans.className + " text-sm text-[#2D2C3C]"}>
-                    {ticketCategory.name}
-                  </p>
-                </div>
-                <p className={dmSans.className + " text-sm text-[#8B8B8B]"}>
-                  Sales end on Sep 20, 2024
-                </p>
-              </div>
-              <div className="flex item-center justify-between">
-                <p
-                  className={
-                    dmSans.className + " text-[18px] font-bold text-[#2D2C3C]"
-                  }
-                >
-                  LKR {ticketCategory.price}
-                </p>
-                <div className="flex items-center gap-2">
-                  <Image src={ticketGray} alt="" height={12} width={12} />
+          {eventData?.venues?.zone_ticket_category?.map(
+            (ticketCategory, index) => (
+              <div
+                key={index}
+                className="px-3 py-4 border-[#DFDFDF] border rounded-[4px]"
+              >
+                <div className="flex item-center justify-between mb-4">
+                  <div className="flex items-center gap-2">
+                    <Image src={ticket} alt="" height={14} width={14} />
+                    <p className={dmSans.className + " text-sm text-[#2D2C3C]"}>
+                      {ticketCategory.name}
+                    </p>
+                  </div>
                   <p className={dmSans.className + " text-sm text-[#8B8B8B]"}>
-                    05 AVAILABLE
+                    Sales end on Sep 20, 2024
                   </p>
                 </div>
+                <div className="flex item-center justify-between">
+                  <p
+                    className={
+                      dmSans.className + " text-[18px] font-bold text-[#2D2C3C]"
+                    }
+                  >
+                    LKR {ticketCategory.price}
+                  </p>
+                  <div className="flex items-center gap-2">
+                    <Image src={ticketGray} alt="" height={12} width={12} />
+                    <p className={dmSans.className + " text-sm text-[#8B8B8B]"}>
+                      05 AVAILABLE
+                    </p>
+                  </div>
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          )}
         </div>
       </div>
       <div>
