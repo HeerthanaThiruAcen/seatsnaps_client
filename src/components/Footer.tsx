@@ -22,11 +22,11 @@ export default function Footer() {
         <p className="text-xs text-[#777E90]">
           Copyright © 2023 Seatsnaps. All rights reserved
         </p>
-        <Link href="/" className="text-[#777E90] text-xs">
+        <Link href="/privacy-policy" className="text-[#777E90] text-xs">
           Privacy Policy
         </Link>
-        <Link href="/" className="text-[#777E90] text-xs">
-          Team of Use
+        <Link href="/terms-and-conditions" className="text-[#777E90] text-xs">
+          Term of Use
         </Link>
       </div>
     </div>
