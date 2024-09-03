@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { Event } from "@/app/types";
 import dayjs from "dayjs";
 import { createClient } from "@/utils/supabase/client";
+import EventTime from "./EventTime";
 
 export default function EventCard({ event }: { event: Event }) {
   const router = useRouter();
@@ -78,13 +79,7 @@ export default function EventCard({ event }: { event: Event }) {
               {event?.name}
             </h4>
             <p>{event?.description}</p>
-            <p>
-              {event?.endTime
-                ? `${dayjs(event?.startTime, "HH:mm:ss").format(
-                    "h:mm A"
-                  )} - ${dayjs(event?.endTime, "HH:mm:ss").format("h:mm A")}`
-                : dayjs(event?.startTime, "HH:mm:ss").format("h:mm A")}
-            </p>
+            <EventTime event={event} />
             <div className="flex gap-[9px]">
               <div className="flex items-center gap-[7px]">
                 <Image height={21} width={21} alt="" src={priceIcon} />{" "}

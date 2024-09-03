@@ -14,6 +14,7 @@ export default function SelectTickets({
   setStep,
 }: {
   handleSelectTicket: () => void;
+  setStep: React.Dispatch<React.SetStateAction<number>>;
 }) {
   const supabase = createClient();
   const params = useParams();
